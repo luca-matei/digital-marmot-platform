@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+setuptools = "*"
+wheel = "*"
+redis = "*"
+psycopg2 = "*"
+sqlalchemy = "*"
+pydantic = "*"
+dramatiq = "*"
+pydantic-settings = "*"
+fastapi = "*"
+coverage = "*"
+black = "*"
+openai = "*"
+uvicorn = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.7"
