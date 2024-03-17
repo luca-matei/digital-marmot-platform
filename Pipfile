@@ -17,6 +17,10 @@ coverage = "*"
 black = "*"
 openai = "*"
 uvicorn = "*"
+aiohttp = "*"
+orjson = "*"
+lxml = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
