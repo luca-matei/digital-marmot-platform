@@ -1,5 +1,5 @@
 # Digital Marmot Platform
-A full development environment in the cloud for software developers
+A complete manager of your digital life
 
 ## Installation
 **Pre-requisites**
@@ -10,5 +10,5 @@ A full development environment in the cloud for software developers
 - Docker
 
 ```bash
-$ pipenv install setuptools wheel  # For stable installs 
+$ pipenv --python 3.11.7 install wheel setuptools  # For stable installs 
 ```
