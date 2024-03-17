@@ -1,9 +1,8 @@
-# Main FastAPI application
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .config import settings
+from api.config import settings
+from api.resources.weather.routes import router as weather_router
 
 app = FastAPI()
 
@@ -14,6 +13,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(weather_router)
 
 
 @app.get("/")
