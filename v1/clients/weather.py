@@ -1,7 +1,7 @@
 from enum import Enum
 
-from api.config import settings
-from api.clients.http import HTTPClient
+from v1.config import settings
+from v1.clients.http import HTTPClient
 
 
 class APIMethod(str, Enum):

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from api.clients.weather import Weather
+from v1.clients.weather import Weather
 
 router = APIRouter(prefix="/weather")
 
