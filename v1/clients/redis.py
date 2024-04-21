@@ -4,7 +4,7 @@ import redis.asyncio as async_redis
 from v1.config import settings
 
 
-class RedisConnectionPoolManager:
+class RedisManager:
     _pools = {}
 
     @classmethod
@@ -38,7 +38,7 @@ class RedisSession:
         self.decode_responses = decode == "utf-8"
         self.is_async = False
         self.connection = None
-        self.pool = RedisConnectionPoolManager.get_pool(
+        self.pool = RedisManager.get_pool(
             db, self.is_async, self.decode_responses
         )
 
@@ -53,7 +53,7 @@ class RedisSession:
 
     async def __aenter__(self):
         self.is_async = True
-        self.pool = RedisConnectionPoolManager.get_pool(
+        self.pool = RedisManager.get_pool(
             self.db, self.is_async, self.decode_responses
         )
         self.connection = async_redis.Redis(connection_pool=self.pool)

@@ -6,9 +6,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from v1.config import settings
 from v1.resources.weather.routes import router as weather_router
+from v1.resources.finance.routes import router as finance_router
 
 app = FastAPI()
-router = APIRouter()
+router = APIRouter(prefix="/v1")
 
 
 @app.get("/")
@@ -33,8 +34,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(weather_router, prefix="/v1")
-app.include_router(router, prefix="/v1")
+router.include_router(weather_router)
+router.include_router(finance_router)
+app.include_router(router)
 
 
 if __name__ == "__main__":
