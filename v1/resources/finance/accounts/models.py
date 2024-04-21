@@ -6,7 +6,7 @@ from sqlalchemy import (
     DateTime,
     String,
     text,
-    ForeignKey,
+    ForeignKey, Integer,
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped
@@ -41,3 +41,9 @@ class FinanceAccount(SyncBase):
     name: Mapped[str] = Column(String, nullable=False)
     iban: Mapped[str] = Column(String, nullable=False)
     currency: Mapped[str] = Column(String, nullable=False)
+    balance: Mapped[float] = Column(String, nullable=False)
+    transactions_count: Mapped[int] = Column(
+        Integer,
+        nullable=False,
+        server_default=text("0")
+    )

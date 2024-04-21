@@ -40,6 +40,7 @@ class FinanceTransaction(SyncBase):
         nullable=False
     )
     title: Mapped[str] = Column(String, nullable=False)
+    description: Mapped[str] = Column(String, nullable=False)
     category: Mapped[str] = Column(String, nullable=False)
     amount: Mapped[float] = Column(Float, nullable=False)
     timestamp: Mapped[datetime] = Column(

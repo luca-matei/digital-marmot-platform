@@ -20,13 +20,13 @@ class PostgresManager:
             if is_async:
                 engine = create_async_engine(
                     settings.db_url,
-                    echo=True,
+                    # echo=True,
                 )
                 AsyncBase.metadata.bind = engine
             else:
                 engine = create_engine(
                     settings.db_url,
-                    echo=True,
+                    # echo=True,
                 )
                 SyncBase.metadata.bind = engine
             cls._engines[key] = engine
