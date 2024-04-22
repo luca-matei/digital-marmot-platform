@@ -38,9 +38,7 @@ class RedisSession:
         self.decode_responses = decode == "utf-8"
         self.is_async = False
         self.connection = None
-        self.pool = RedisManager.get_pool(
-            db, self.is_async, self.decode_responses
-        )
+        self.pool = RedisManager.get_pool(db, self.is_async, self.decode_responses)
 
     def __enter__(self):
         if self.is_async:
@@ -53,9 +51,7 @@ class RedisSession:
 
     async def __aenter__(self):
         self.is_async = True
-        self.pool = RedisManager.get_pool(
-            self.db, self.is_async, self.decode_responses
-        )
+        self.pool = RedisManager.get_pool(self.db, self.is_async, self.decode_responses)
         self.connection = async_redis.Redis(connection_pool=self.pool)
         return self.connection
 

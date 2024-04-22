@@ -5,8 +5,10 @@ from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from v1.config import settings
+from v1.middleware.authe import AuthenticateUserMiddleware
 from v1.resources.weather.routes import router as weather_router
 from v1.resources.finance.routes import router as finance_router
+from v1.resources.notes.routes import router as notes_router
 
 app = FastAPI()
 router = APIRouter(prefix="/v1")
@@ -33,9 +35,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(AuthenticateUserMiddleware)
 
 router.include_router(weather_router)
 router.include_router(finance_router)
+router.include_router(notes_router)
 app.include_router(router)
 
 

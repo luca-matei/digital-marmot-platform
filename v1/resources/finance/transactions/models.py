@@ -17,27 +17,25 @@ from v1.clients.postgres import SyncBase
 
 @dataclass
 class FinanceTransaction(SyncBase):
-    __tablename__ = 'finance_transactions'
+    __tablename__ = "finance_transactions"
 
     id: Mapped[UUID] = Column(
-        UUID(as_uuid=True),
-        primary_key=True,
-        server_default=text("gen_random_uuid()")
+        UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()")
     )
     created_at: Mapped[datetime] = Column(
         DateTime(timezone=True),
         nullable=False,
-        server_default=text("CURRENT_TIMESTAMP")
+        server_default=text("CURRENT_TIMESTAMP"),
     )
     updated_at: Mapped[datetime] = Column(
         DateTime(timezone=True),
         nullable=False,
-        server_default=text("CURRENT_TIMESTAMP")
+        server_default=text("CURRENT_TIMESTAMP"),
     )
     user_id: Mapped[UUID] = Column(
         UUID(as_uuid=True),
-        ForeignKey("auth.users.id", ondelete="CASCADE"),
-        nullable=False
+        ForeignKey("user_profiles.id", ondelete="CASCADE"),
+        nullable=False,
     )
     title: Mapped[str] = Column(String, nullable=False)
     description: Mapped[str] = Column(String, nullable=False)
@@ -46,11 +44,11 @@ class FinanceTransaction(SyncBase):
     timestamp: Mapped[datetime] = Column(
         DateTime(timezone=True),
         nullable=False,
-        server_default=text("CURRENT_TIMESTAMP")
+        server_default=text("CURRENT_TIMESTAMP"),
     )
     account_id: Mapped[UUID] = Column(
         UUID(as_uuid=True),
         ForeignKey("finance_accounts.id", ondelete="CASCADE"),
-        nullable=False
+        nullable=False,
     )
     currency: Mapped[str] = Column(String, nullable=False)

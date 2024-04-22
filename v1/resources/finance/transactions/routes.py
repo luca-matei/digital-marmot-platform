@@ -19,13 +19,25 @@ async def get_transactions(
     limit: int = 10,
 ):
     with PostgresSession() as session:
-        transactions = session.query(FinanceTransaction).limit(limit).offset(offset).all()
+        transactions = (
+            session.query(FinanceTransaction).limit(limit).offset(offset).all()
+        )
         transactions = [FinanceTransactionResponse(**t.__dict__) for t in transactions]
 
         if filters:
-            total_count = session.query(FinanceAccount).filter_by(id=account_id).first().transactions_count
+            total_count = (
+                session.query(FinanceAccount)
+                .filter_by(id=account_id)
+                .first()
+                .transactions_count
+            )
         else:
-            total_count = session.query(FinanceAccount).filter_by(id=account_id).first().transactions_count
+            total_count = (
+                session.query(FinanceAccount)
+                .filter_by(id=account_id)
+                .first()
+                .transactions_count
+            )
 
     return {
         "transactions": transactions,
