@@ -13,7 +13,6 @@ def create_note(user_id: UUID, parent_id: UUID = None):
             user_id=user_id,
         )
         session.add(note)
-        session.commit()
         return note.id
 
 
@@ -26,3 +25,12 @@ def get_tree(user_id: UUID, parent_id: UUID = None):
         )
         note_tree = [NoteTreeResponse(**nt._mapping) for nt in note_tree]
         return note_tree
+
+
+def delete_note(note_id: UUID):
+    with PostgresSession() as session:
+        note = session.query(NotesFile).get(note_id)
+        if not note:
+            return False
+        session.delete(note)
+        return True
