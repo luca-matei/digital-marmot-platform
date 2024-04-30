@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, String, Text, ForeignKey, text
+from sqlalchemy import Column, DateTime, String, Text, ForeignKey, text, Integer
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped
 
@@ -49,8 +49,7 @@ class NotesFile(SyncBase):
         nullable=False,
     )
 
-    # Text content of the note
-    content: Mapped[str] = Column(Text, nullable=False)
+    order: Mapped[int] = Column(Integer, nullable=False)
 
 
 @dataclass

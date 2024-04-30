@@ -14,7 +14,7 @@ async def get_root_note_tree(request: Request):
     return {"tree": note_tree}
 
 
-@router.get("/tree/{note_id}")
+@router.get("/{note_id}/tree")
 async def get_note_tree(request: Request, note_id: UUID):
     note_tree = get_tree(request.state.user_id, note_id)
     return {"tree": note_tree}

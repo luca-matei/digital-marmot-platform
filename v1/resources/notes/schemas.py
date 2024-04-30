@@ -8,3 +8,5 @@ class NoteTreeResponse(BaseModel):
     id: UUID
     title: str
     icon: Optional[str]
+    parent_id: Optional[UUID]
+    order: int
