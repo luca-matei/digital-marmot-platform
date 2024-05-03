@@ -3,7 +3,7 @@ from uuid import UUID
 from fastapi import APIRouter
 from starlette.requests import Request
 
-from v1.resources.notes.helpers import create_note, get_tree, delete_note
+from v1.resources.notes.helpers import create_note, get_tree, delete_note, get_note
 
 router = APIRouter(prefix="/notes")
 
@@ -20,9 +20,10 @@ async def get_note_tree(request: Request, note_id: UUID):
     return {"tree": note_tree}
 
 
-@router.get("")
-async def get_notes():
-    pass
+@router.get("/{note_id}")
+async def get_note_body(request: Request, note_id: UUID):
+    note = get_note(request.state.user_id, note_id)
+    return {"note": note}
 
 
 @router.post("")

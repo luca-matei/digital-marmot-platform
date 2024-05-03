@@ -2,7 +2,7 @@ from uuid import UUID
 
 from v1.clients.postgres import PostgresSession
 from v1.resources.notes.models import NotesFile
-from v1.resources.notes.schemas import NoteTreeResponse
+from v1.resources.notes.schemas import NoteTreeResponse, NoteResponse
 
 
 def create_note(user_id: UUID, parent_id: UUID = None):
@@ -14,6 +14,14 @@ def create_note(user_id: UUID, parent_id: UUID = None):
         )
         session.add(note)
         return note.id
+
+
+def get_note(user_id: UUID, note_id: UUID):
+    with PostgresSession() as session:
+        note = session.query(NotesFile).get(note_id)
+        if not note or note.user_id != user_id:
+            return None
+        return NoteResponse(**note.__dict__)
 
 
 def get_tree(user_id: UUID, parent_id: UUID = None):
